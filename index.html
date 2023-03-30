@@ -1,0 +1,2054 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        #map {
+            width: 1617px;
+            height: 822px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/ADMINISTRASIKABUPATEN_AR_50K_0.js"></script>
+        <script src="data/ARENAOLAHRAGA_PT_50K_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:27, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        function pop_ADMINISTRASIKABUPATEN_AR_50K_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDPPUM'] !== null ? autolinker.link(feature.properties['KDPPUM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(feature.properties['NAMOBJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REMARK'] !== null ? autolinker.link(feature.properties['REMARK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDPBPS'] !== null ? autolinker.link(feature.properties['KDPBPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FCODE'] !== null ? autolinker.link(feature.properties['FCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LUASWH'] !== null ? autolinker.link(feature.properties['LUASWH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UUPP'] !== null ? autolinker.link(feature.properties['UUPP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SRS_ID'] !== null ? autolinker.link(feature.properties['SRS_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LCODE'] !== null ? autolinker.link(feature.properties['LCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['METADATA'] !== null ? autolinker.link(feature.properties['METADATA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDEBPS'] !== null ? autolinker.link(feature.properties['KDEBPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDEPUM'] !== null ? autolinker.link(feature.properties['KDEPUM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDCBPS'] !== null ? autolinker.link(feature.properties['KDCBPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDCPUM'] !== null ? autolinker.link(feature.properties['KDCPUM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDBBPS'] !== null ? autolinker.link(feature.properties['KDBBPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KDBPUM'] !== null ? autolinker.link(feature.properties['KDBPUM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WADMKD'] !== null ? autolinker.link(feature.properties['WADMKD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WIADKD'] !== null ? autolinker.link(feature.properties['WIADKD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WADMKC'] !== null ? autolinker.link(feature.properties['WADMKC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WIADKC'] !== null ? autolinker.link(feature.properties['WIADKC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WADMKK'] !== null ? autolinker.link(feature.properties['WADMKK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WIADKK'] !== null ? autolinker.link(feature.properties['WIADKK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WADMPR'] !== null ? autolinker.link(feature.properties['WADMPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['WIADPR'] !== null ? autolinker.link(feature.properties['WIADPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPADM'] !== null ? autolinker.link(feature.properties['TIPADM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ADMINISTRASIKABUPATEN_AR_50K_0_0(feature) {
+            switch(String(feature.properties['NAMOBJ'])) {
+                default:
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,59,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kota Bandarlampung':
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,82,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lampung Selatan':
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,90,90,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lampung Tengah':
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(17,187,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lampung Timur':
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,161,109,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pesawaran':
+                    return {
+                pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,254,35,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ADMINISTRASIKABUPATEN_AR_50K_0');
+        map.getPane('pane_ADMINISTRASIKABUPATEN_AR_50K_0').style.zIndex = 400;
+        map.getPane('pane_ADMINISTRASIKABUPATEN_AR_50K_0').style['mix-blend-mode'] = 'normal';
+        var layer_ADMINISTRASIKABUPATEN_AR_50K_0 = new L.geoJson(json_ADMINISTRASIKABUPATEN_AR_50K_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ADMINISTRASIKABUPATEN_AR_50K_0',
+            layerName: 'layer_ADMINISTRASIKABUPATEN_AR_50K_0',
+            pane: 'pane_ADMINISTRASIKABUPATEN_AR_50K_0',
+            onEachFeature: pop_ADMINISTRASIKABUPATEN_AR_50K_0,
+            style: style_ADMINISTRASIKABUPATEN_AR_50K_0_0,
+        });
+        bounds_group.addLayer(layer_ADMINISTRASIKABUPATEN_AR_50K_0);
+        map.addLayer(layer_ADMINISTRASIKABUPATEN_AR_50K_0);
+        function pop_ARENAOLAHRAGA_PT_50K_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(feature.properties['NAMOBJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FCODE'] !== null ? autolinker.link(feature.properties['FCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ELEVAS'] !== null ? autolinker.link(feature.properties['ELEVAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REMARK'] !== null ? autolinker.link(feature.properties['REMARK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SRS_ID'] !== null ? autolinker.link(feature.properties['SRS_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LCODE'] !== null ? autolinker.link(feature.properties['LCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['METADATA'] !== null ? autolinker.link(feature.properties['METADATA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ARENAOLAHRAGA_PT_50K_1_0(feature) {
+            switch(String(feature.properties['NAMOBJ'])) {
+                case 'Gedung Olahraga Kalianda Waylubuk':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,54,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Gedung Olahraga Lampung Selatan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,80,217,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Balinuraga':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(181,220,91,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bandaragung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,103,126,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Banjarsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,20,88,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Batanghariogan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,171,208,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Batubalak':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,132,89,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Batulimanindah':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,206,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Beringinkencana':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,110,113,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bola Bergen':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,102,92,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bola Mekarmulya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(61,233,176,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bola Negararatu':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(206,160,95,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bola PTPN':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,222,88,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bumidaya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,121,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Bumijaya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(50,211,138,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Cintamulya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(29,202,193,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Ciptodadi':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,222,100,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Cugung Satu dan Dua':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,184,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Cugung Tiga dan Empat':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(180,52,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Dua Cintamulya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,226,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Dusun Guring':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,212,133,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Dusun Pematangbom':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,213,126,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Dusun Sidoluhur Sidoasri':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,82,47,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Dusun Tiga':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,121,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Fajarbaru':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,162,80,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Hargopancuran':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(13,60,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Jatiagung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(54,239,122,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Jatiindah':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,178,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kalirejo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,100,67,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Karang Rejo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(173,36,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Karangpucung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,174,18,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Karangsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(14,229,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Karyamulyasari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,208,214,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kecamatan Palas':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(218,175,82,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kedaung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(20,227,123,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kelaten':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(131,212,85,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kertosari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,103,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Krawang Sari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,65,218,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Kridatama Sakti Srikaton':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,127,205,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Mandalasari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,48,112,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Margajasa':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,130,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Margodadi':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,220,102,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Margomulyo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,90,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Merakbatin':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,156,57,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Min':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,200,87,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Pancasila':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,174,15,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Pancatunggal':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,57,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Persiba Bms':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,210,112,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Purwodadidalam':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,109,89,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Rantauminyak':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(49,64,203,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Rawaselapan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(67,157,231,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Rejomulyo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,71,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Ruangtengah':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,83,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sabahbalau':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(47,214,61,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan SD Negeri 2 Galihlunik':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,210,83,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan SD Negeri 2 Krawangsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(94,155,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan SD Negeri 2 Neglasari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,213,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan SD Negeri Kertosari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,207,40,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepak Bola Amal Bakti':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,90,101,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepak Bola Margorejo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(141,41,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Gedungagung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(120,76,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola PTPN 7 Waygalih':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(160,225,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Purwodadisimpang':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,153,118,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Sabahbalau':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,120,19,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Salahuddin':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,49,176,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Serdang':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,139,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Sidodadiasri':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(77,104,238,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Sidoharjo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,18,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Sinarrejeki':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(14,25,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sepakbola Tanjungsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,34,141,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sidodadiasri':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(69,231,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sidoharjo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(83,148,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sinarogan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,28,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sinarpalembang':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,123,53,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sinarpasman':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,217,46,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sinarrejeki':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,213,86,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sindanganom':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,106,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sindangsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(121,212,175,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan SMP Sumbangsih Neglasari Katibung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,228,78,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sritanjung Jatibaru':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(90,231,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Suban':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,18,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sukamaju':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,89,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sukamulya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(206,66,127,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sukanegara':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,231,93,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sukapura':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,118,176,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sukaraja':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,111,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sumberagung':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(99,234,96,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sumberjaya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,67,195,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Sumbersari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(177,205,92,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Talang Waysulan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,232,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Tanjungbintang':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,226,38,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Tanjungjaya':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,223,170,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Tanjungsari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,65,181,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Tejangpulausebesi':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,19,202,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Titiwangi':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,199,71,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Totoharto':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,118,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Triharjo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,112,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Trimomukti':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,202,84,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Trimulyo':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,27,126,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Waygelam':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(74,221,138,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Waymuli':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,232,72,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Waymuli Dua':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(233,191,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Wonodadi':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,235,127,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Lapangan Wonorejo Neglasari':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Stadion Kalianda':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(24,102,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Stadion Radin Intan':
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(149,226,131,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,103,227,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ARENAOLAHRAGA_PT_50K_1');
+        map.getPane('pane_ARENAOLAHRAGA_PT_50K_1').style.zIndex = 401;
+        map.getPane('pane_ARENAOLAHRAGA_PT_50K_1').style['mix-blend-mode'] = 'normal';
+        var layer_ARENAOLAHRAGA_PT_50K_1 = new L.geoJson(json_ARENAOLAHRAGA_PT_50K_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ARENAOLAHRAGA_PT_50K_1',
+            layerName: 'layer_ARENAOLAHRAGA_PT_50K_1',
+            pane: 'pane_ARENAOLAHRAGA_PT_50K_1',
+            onEachFeature: pop_ARENAOLAHRAGA_PT_50K_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ARENAOLAHRAGA_PT_50K_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ARENAOLAHRAGA_PT_50K_1);
+        map.addLayer(layer_ARENAOLAHRAGA_PT_50K_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'ARENAOLAHRAGA_PT_50K<br /><table><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_GedungOlahragaKaliandaWaylubuk0.png" /></td><td>Gedung Olahraga Kalianda Waylubuk</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_GedungOlahragaLampungSelatan1.png" /></td><td>Gedung Olahraga Lampung Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBalinuraga2.png" /></td><td>Lapangan Balinuraga</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBandaragung3.png" /></td><td>Lapangan Bandaragung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBanjarsari4.png" /></td><td>Lapangan Banjarsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBatanghariogan5.png" /></td><td>Lapangan Batanghariogan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBatubalak6.png" /></td><td>Lapangan Batubalak</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBatulimanindah7.png" /></td><td>Lapangan Batulimanindah</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBeringinkencana8.png" /></td><td>Lapangan Beringinkencana</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBolaBergen9.png" /></td><td>Lapangan Bola Bergen</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBolaMekarmulya10.png" /></td><td>Lapangan Bola Mekarmulya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBolaNegararatu11.png" /></td><td>Lapangan Bola Negararatu</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBolaPTPN12.png" /></td><td>Lapangan Bola PTPN</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBumidaya13.png" /></td><td>Lapangan Bumidaya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganBumijaya14.png" /></td><td>Lapangan Bumijaya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganCintamulya15.png" /></td><td>Lapangan Cintamulya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganCiptodadi16.png" /></td><td>Lapangan Ciptodadi</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganCugungSatudanDua17.png" /></td><td>Lapangan Cugung Satu dan Dua</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganCugungTigadanEmpat18.png" /></td><td>Lapangan Cugung Tiga dan Empat</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganDuaCintamulya19.png" /></td><td>Lapangan Dua Cintamulya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganDusunGuring20.png" /></td><td>Lapangan Dusun Guring</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganDusunPematangbom21.png" /></td><td>Lapangan Dusun Pematangbom</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganDusunSidoluhurSidoasri22.png" /></td><td>Lapangan Dusun Sidoluhur Sidoasri</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganDusunTiga23.png" /></td><td>Lapangan Dusun Tiga</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganFajarbaru24.png" /></td><td>Lapangan Fajarbaru</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganHargopancuran25.png" /></td><td>Lapangan Hargopancuran</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganJatiagung26.png" /></td><td>Lapangan Jatiagung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganJatiindah27.png" /></td><td>Lapangan Jatiindah</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKalirejo28.png" /></td><td>Lapangan Kalirejo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKarangRejo29.png" /></td><td>Lapangan Karang Rejo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKarangpucung30.png" /></td><td>Lapangan Karangpucung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKarangsari31.png" /></td><td>Lapangan Karangsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKaryamulyasari32.png" /></td><td>Lapangan Karyamulyasari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKecamatanPalas33.png" /></td><td>Lapangan Kecamatan Palas</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKedaung34.png" /></td><td>Lapangan Kedaung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKelaten35.png" /></td><td>Lapangan Kelaten</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKertosari36.png" /></td><td>Lapangan Kertosari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKrawangSari37.png" /></td><td>Lapangan Krawang Sari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganKridatamaSaktiSrikaton38.png" /></td><td>Lapangan Kridatama Sakti Srikaton</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMandalasari39.png" /></td><td>Lapangan Mandalasari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMargajasa40.png" /></td><td>Lapangan Margajasa</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMargodadi41.png" /></td><td>Lapangan Margodadi</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMargomulyo42.png" /></td><td>Lapangan Margomulyo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMerakbatin43.png" /></td><td>Lapangan Merakbatin</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganMin44.png" /></td><td>Lapangan Min</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganPancasila45.png" /></td><td>Lapangan Pancasila</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganPancatunggal46.png" /></td><td>Lapangan Pancatunggal</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganPersibaBms47.png" /></td><td>Lapangan Persiba Bms</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganPurwodadidalam48.png" /></td><td>Lapangan Purwodadidalam</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganRantauminyak49.png" /></td><td>Lapangan Rantauminyak</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganRawaselapan50.png" /></td><td>Lapangan Rawaselapan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganRejomulyo51.png" /></td><td>Lapangan Rejomulyo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganRuangtengah52.png" /></td><td>Lapangan Ruangtengah</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSabahbalau53.png" /></td><td>Lapangan Sabahbalau</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSDNegeri2Galihlunik54.png" /></td><td>Lapangan SD Negeri 2 Galihlunik</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSDNegeri2Krawangsari55.png" /></td><td>Lapangan SD Negeri 2 Krawangsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSDNegeri2Neglasari56.png" /></td><td>Lapangan SD Negeri 2 Neglasari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSDNegeriKertosari57.png" /></td><td>Lapangan SD Negeri Kertosari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakBolaAmalBakti58.png" /></td><td>Lapangan Sepak Bola Amal Bakti</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakBolaMargorejo59.png" /></td><td>Lapangan Sepak Bola Margorejo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaGedungagung60.png" /></td><td>Lapangan Sepakbola Gedungagung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaPTPN7Waygalih61.png" /></td><td>Lapangan Sepakbola PTPN 7 Waygalih</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaPurwodadisimpang62.png" /></td><td>Lapangan Sepakbola Purwodadisimpang</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSabahbalau63.png" /></td><td>Lapangan Sepakbola Sabahbalau</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSalahuddin64.png" /></td><td>Lapangan Sepakbola Salahuddin</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSerdang65.png" /></td><td>Lapangan Sepakbola Serdang</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSidodadiasri66.png" /></td><td>Lapangan Sepakbola Sidodadiasri</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSidoharjo67.png" /></td><td>Lapangan Sepakbola Sidoharjo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaSinarrejeki68.png" /></td><td>Lapangan Sepakbola Sinarrejeki</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSepakbolaTanjungsari69.png" /></td><td>Lapangan Sepakbola Tanjungsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSidodadiasri70.png" /></td><td>Lapangan Sidodadiasri</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSidoharjo71.png" /></td><td>Lapangan Sidoharjo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSinarogan72.png" /></td><td>Lapangan Sinarogan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSinarpalembang73.png" /></td><td>Lapangan Sinarpalembang</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSinarpasman74.png" /></td><td>Lapangan Sinarpasman</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSinarrejeki75.png" /></td><td>Lapangan Sinarrejeki</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSindanganom76.png" /></td><td>Lapangan Sindanganom</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSindangsari77.png" /></td><td>Lapangan Sindangsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSMPSumbangsihNeglasariKatibung78.png" /></td><td>Lapangan SMP Sumbangsih Neglasari Katibung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSritanjungJatibaru79.png" /></td><td>Lapangan Sritanjung Jatibaru</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSuban80.png" /></td><td>Lapangan Suban</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSukamaju81.png" /></td><td>Lapangan Sukamaju</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSukamulya82.png" /></td><td>Lapangan Sukamulya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSukanegara83.png" /></td><td>Lapangan Sukanegara</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSukapura84.png" /></td><td>Lapangan Sukapura</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSukaraja85.png" /></td><td>Lapangan Sukaraja</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSumberagung86.png" /></td><td>Lapangan Sumberagung</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSumberjaya87.png" /></td><td>Lapangan Sumberjaya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganSumbersari88.png" /></td><td>Lapangan Sumbersari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTalangWaysulan89.png" /></td><td>Lapangan Talang Waysulan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTanjungbintang90.png" /></td><td>Lapangan Tanjungbintang</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTanjungjaya91.png" /></td><td>Lapangan Tanjungjaya</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTanjungsari92.png" /></td><td>Lapangan Tanjungsari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTejangpulausebesi93.png" /></td><td>Lapangan Tejangpulausebesi</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTitiwangi94.png" /></td><td>Lapangan Titiwangi</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTotoharto95.png" /></td><td>Lapangan Totoharto</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTriharjo96.png" /></td><td>Lapangan Triharjo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTrimomukti97.png" /></td><td>Lapangan Trimomukti</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganTrimulyo98.png" /></td><td>Lapangan Trimulyo</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganWaygelam99.png" /></td><td>Lapangan Waygelam</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganWaymuli100.png" /></td><td>Lapangan Waymuli</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganWaymuliDua101.png" /></td><td>Lapangan Waymuli Dua</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganWonodadi102.png" /></td><td>Lapangan Wonodadi</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_LapanganWonorejoNeglasari103.png" /></td><td>Lapangan Wonorejo Neglasari</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_StadionKalianda104.png" /></td><td>Stadion Kalianda</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_StadionRadinIntan105.png" /></td><td>Stadion Radin Intan</td></tr><tr><td style="text-align: center;"><img src="legend/ARENAOLAHRAGA_PT_50K_1_106.png" /></td><td></td></tr></table>': layer_ARENAOLAHRAGA_PT_50K_1,'ADMINISTRASIKABUPATEN_AR_50K<br /><table><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_KotaBandarlampung1.png" /></td><td>Kota Bandarlampung</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_LampungSelatan2.png" /></td><td>Lampung Selatan</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_LampungTengah3.png" /></td><td>Lampung Tengah</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_LampungTimur4.png" /></td><td>Lampung Timur</td></tr><tr><td style="text-align: center;"><img src="legend/ADMINISTRASIKABUPATEN_AR_50K_0_Pesawaran5.png" /></td><td>Pesawaran</td></tr></table>': layer_ADMINISTRASIKABUPATEN_AR_50K_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_ADMINISTRASIKABUPATEN_AR_50K_0.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAMOBJ'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMOBJ']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ADMINISTRASIKABUPATEN_AR_50K_0'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_ARENAOLAHRAGA_PT_50K_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAMOBJ'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAMOBJ']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ARENAOLAHRAGA_PT_50K_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_ARENAOLAHRAGA_PT_50K_1,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'NAMOBJ'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_ADMINISTRASIKABUPATEN_AR_50K_0,layer_ARENAOLAHRAGA_PT_50K_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_ADMINISTRASIKABUPATEN_AR_50K_0,layer_ARENAOLAHRAGA_PT_50K_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_ADMINISTRASIKABUPATEN_AR_50K_0,layer_ARENAOLAHRAGA_PT_50K_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_ADMINISTRASIKABUPATEN_AR_50K_0,layer_ARENAOLAHRAGA_PT_50K_1]);
+        });
+        </script>
+    </body>
+</html>
